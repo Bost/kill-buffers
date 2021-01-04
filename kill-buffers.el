@@ -120,4 +120,20 @@ displayed."
           (kill-buffer buffer)))
       (message "Killed %i dired buffer(s)." count))))
 
+(defun my=close-buffer ()
+  "Clojure repl buffer needs to invoke its own kill function"
+  (interactive)
+  (if (and (fboundp 'cider-repls) ;; is cider loaded?
+           (member (current-buffer) (cider-repls)))
+      (progn
+        (message "Calling (cider-quit)")
+        (cider-quit))
+    ;; (kill-buffer-and-window) works even for the emacs-server
+    ;; (if server-buffer-clients
+    ;;     (server-edit)
+    ;;   (kill-this-buffer))
+    (kill-buffer)
+    ;; (kill-buffer-and-window)
+    ))
+
 (provide 'kill-buffers)
