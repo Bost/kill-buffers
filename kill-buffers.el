@@ -83,13 +83,13 @@ displayed."
                       magit-revision-mode
                       magit-stash-mode
                       magit-process-mode
-                      bs-mode ; *buffer-selection*
+                      bs-mode               ; for *buffer-selection*
                       ;; in fundamenatal-mode:
                       ;; *package-build-checkout*
                       ;; *cider-refresh-log*
                       ;; *edn*
                       ;; *Backtrace*
-                      ;; *Help*
+                      Buffer-menu-mode      ; for *Buffer List*
                       cider-browse-ns-mode  ; for *cider-ns-browser*
                       cider-stacktrace-mode ; for *cider-error*
                       cider-docview-mode    ; for *cider-doc*
