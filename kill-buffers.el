@@ -103,8 +103,12 @@ displayed."
                       emacs-lisp-compilation-mode ; for *Compile-Log*
                       minibuffer-inactive-mode ; for *Minibuf-1*
                       ))
-          (setq count (1+ count))
-          (kill-buffer buffer)))
+          (kill-buffer buffer)
+          (setq count (1+ count))))
+      (dolist (buf '("*Warnings*" "*vc*"))
+        (when (get-buffer buf) ; check if buffer exists
+          (kill-buffer buf)
+          (setq count (1+ count))))
       ;; (delete-other-windows)
       (message "Buffer(s) killed: %i" count))))
 
@@ -137,3 +141,5 @@ displayed."
     ))
 
 (provide 'kill-buffers)
+
+;;; kill-buffers.el ends here
