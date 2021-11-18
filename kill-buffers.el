@@ -105,7 +105,7 @@ displayed."
                       ))
           (kill-buffer buffer)
           (setq count (1+ count))))
-      (dolist (buf '("*Warnings*" "*vc*"))
+      (dolist (buf '("*Warnings*" "*vc*" "*quelpa-build-checkout*"))
         (when (get-buffer buf) ; check if buffer exists
           (kill-buffer buf)
           (setq count (1+ count))))
