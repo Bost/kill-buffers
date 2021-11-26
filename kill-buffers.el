@@ -76,6 +76,7 @@ displayed."
       (dolist (buffer (buffer-list))
         (set-buffer buffer)
         ;; find out buffer's major mode: (message "%s" major-mode)
+        ;; prefer explicit listing of unwanted buffers
         (when (find major-mode
                     '(magit-status-mode
                       magit-log-mode
@@ -83,29 +84,35 @@ displayed."
                       magit-revision-mode
                       magit-stash-mode
                       magit-process-mode
-                      bs-mode               ; for *buffer-selection*
-                      ;; in fundamenatal-mode:
-                      ;; *package-build-checkout*
-                      ;; *cider-refresh-log*
-                      ;; *edn*
-                      ;; *Backtrace*
-                      Buffer-menu-mode      ; for *Buffer List*
-                      cider-browse-ns-mode  ; for *cider-ns-browser*
-                      cider-stacktrace-mode ; for *cider-error*
-                      cider-docview-mode    ; for *cider-doc*
-                      cider-inspector-mode  ; for *cider-inspect*
-                      help-mode             ; for *Help*
                       dired-mode
-                      ediff-meta-mode       ; for *Ediff Registry*
-                      Info-mode             ; for *info*
-                      spacemacs-buffer-mode ; for *spacemacs*
-                      compilation-mode      ; for *Compile-Log*
-                      emacs-lisp-compilation-mode ; for *Compile-Log*
-                      minibuffer-inactive-mode ; for *Minibuf-1*
                       ))
           (kill-buffer buffer)
           (setq count (1+ count))))
-      (dolist (buf '("*Warnings*" "*vc*" "*quelpa-build-checkout*"))
+      (dolist (buf '(
+                     "*Backtrace*"
+                     "*Buffer List*"
+                     "*Compile-Log*"
+                     "*Compile-Log*"
+                     "*Ediff Registry*"
+                     "*Help*"
+                     "*Minibuf-1*"
+                     "*Racket Logger*"
+                     "*Warnings*"
+                     "*buffer-selection*"
+                     "*cider-doc*"
+                     "*cider-error*"
+                     "*cider-inspect*"
+                     "*cider-ns-browser*"
+                     "*cider-refresh-log*"
+                     "*edn*"
+                     "*eslint*"
+                     "*eslint::stderr*"
+                     "*info*"
+                     "*package-build-checkout*"
+                     "*quelpa-build-checkout*"
+                     "*spacemacs*"
+                     "*vc*"
+                     ))
         (when (get-buffer buf) ; check if buffer exists
           (kill-buffer buf)
           (setq count (1+ count))))
