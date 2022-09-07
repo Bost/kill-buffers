@@ -133,14 +133,18 @@ displayed."
 (defun my=close-buffer ()
   "Clojure repl buffer needs to invoke its own kill function"
   (interactive)
-  (if (and (fboundp 'cider-repls) ;; is cider loaded?
-           (member (current-buffer) (cider-repls)))
-      (progn
-        (message "Calling (cider-quit)")
-        (cider-quit))
-    (if (equal major-mode 'term-mode)
-        (term-send-eof)
-      (kill-buffer))))
+  (cond
+   ((and (fboundp 'cider-repls) ;; is cider loaded?
+         (member (current-buffer) (cider-repls)))
+    (progn
+      (message "Calling (cider-quit)")
+      (cider-quit)))
+
+   ((equal major-mode 'term-mode)
+    (term-send-eof))
+
+   (t
+    (kill-buffer))))
 
 (provide 'kill-buffers)
 
