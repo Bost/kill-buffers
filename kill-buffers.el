@@ -86,34 +86,34 @@ displayed."
                               )))
           (kill-buffer buffer)
           (setq count (1+ count))))
-      (dolist (buf '(
-                     "*Backtrace*"
-                     "*Buffer List*"
-                     "*Compile-Log*"
-                     "*Compile-Log*"
-                     "*Ediff Registry*"
-                     "*Help*"
-                     "*Minibuf-1*"
-                     "*Racket Logger </>*"
-                     "*Racket Logger*"
-                     "*Warnings*"
-                     "*buffer-selection*"
-                     "*cider-doc*"
-                     "*cider-error*"
-                     "*cider-inspect*"
-                     "*cider-ns-browser*"
-                     "*cider-refresh-log*"
-                     "*edn*"
-                     "*eslint*"
-                     "*eslint::stderr*"
-                     "*info*"
-                     "*package-build-checkout*"
-                     "*quelpa-build-checkout*"
-                     "*spacemacs*"
-                     "*vc*"
-                     ))
-        (when (get-buffer buf) ; check if buffer exists
-          (kill-buffer buf)
+      (dolist (buffer '(
+                        "*Backtrace*"
+                        "*Buffer List*"
+                        "*Compile-Log*"
+                        "*Compile-Log*"
+                        "*Ediff Registry*"
+                        "*Help*"
+                        "*Minibuf-1*"
+                        "*Racket Logger </>*"
+                        "*Racket Logger*"
+                        "*Warnings*"
+                        "*buffer-selection*"
+                        "*cider-doc*"
+                        "*cider-error*"
+                        "*cider-inspect*"
+                        "*cider-ns-browser*"
+                        "*cider-refresh-log*"
+                        "*edn*"
+                        "*eslint*"
+                        "*eslint::stderr*"
+                        "*info*"
+                        "*package-build-checkout*"
+                        "*quelpa-build-checkout*"
+                        "*spacemacs*"
+                        "*vc*"
+                        ))
+        (when (get-buffer buffer) ; check if buffer exists
+          (kill-buffer buffer)
           (setq count (1+ count))))
       ;; (delete-other-windows)
       (message "Buffer(s) killed: %i" count))))
