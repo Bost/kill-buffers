@@ -48,6 +48,14 @@ Returns a message with the count of killed buffers."
   (interactive "sKill buffers matching this regular expression: \nP")
   (message "%d buffer(s) killed." (my=kill-buffers--forcefully regexp internal-too)))
 
+(setq my=magit-unwanted-buffers
+      '(magit-status-mode
+        magit-log-mode
+        magit-diff-mode
+        magit-revision-mode
+        magit-stash-mode
+        magit-process-mode))
+
 (defun my=kill-buffers--magit ()
   "Kill all Magit buffers."
   (interactive)
@@ -56,16 +64,10 @@ Returns a message with the count of killed buffers."
     (let ((count 0))
       (dolist (buffer (buffer-list))
         (set-buffer buffer)
-        (when (find major-mode '(magit-status-mode
-                                 magit-log-mode
-                                 magit-diff-mode
-                                 magit-revision-mode
-                                 magit-stash-mode
-                                 magit-process-mode))
+        (when (find major-mode my=magit-unwanted-buffers)
           (setq count (1+ count))
           (kill-buffer buffer)))
       (message "Killed %i Magit buffer(s)." count))))
-
 
 (defun my=kill-buffers--unwanted ()
   "Kill all unwanted buffers and delete other windows so that only one remains
@@ -78,14 +80,10 @@ displayed."
         ;; find out buffer's major mode: (message "%s" major-mode)
         ;; prefer explicit listing of unwanted buffers
         (when (find major-mode
-                    '(magit-status-mode
-                      magit-log-mode
-                      magit-diff-mode
-                      magit-revision-mode
-                      magit-stash-mode
-                      magit-process-mode
-                      dired-mode
-                      ))
+                    (append my=magit-unwanted-buffers
+                            '(
+                              dired-mode
+                              )))
           (kill-buffer buffer)
           (setq count (1+ count))))
       (dolist (buf '(
