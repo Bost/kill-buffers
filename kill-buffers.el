@@ -138,13 +138,9 @@ displayed."
       (progn
         (message "Calling (cider-quit)")
         (cider-quit))
-    ;; (kill-buffer-and-window) works even for the emacs-server
-    ;; (if server-buffer-clients
-    ;;     (server-edit)
-    ;;   (kill-this-buffer))
-    (kill-buffer)
-    ;; (kill-buffer-and-window)
-    ))
+    (if (equal major-mode 'term-mode)
+        (term-send-eof)
+      (kill-buffer))))
 
 (provide 'kill-buffers)
 
