@@ -144,7 +144,13 @@ displayed."
     (term-send-eof))
 
    (t
-    (kill-buffer))))
+    (kill-buffer)))
+
+  ;; There's no need to place the call of (balance-windows-area) outside of this
+  ;; package to minimizing package dependencies, via e.g.
+  ;;   (advice-add #'my=close-buffer :after balance-windows-area).
+  ;; `balance-windows-area' is from windows.el, which is part of GNU Emacs.
+  (balance-windows-area))
 
 (provide 'kill-buffers)
 
