@@ -46,15 +46,19 @@ indicates whether to kill internal buffers too.
 
 Returns a message with the count of killed buffers."
   (interactive "sKill buffers matching this regular expression: \nP")
-  (message "%d buffer(s) killed." (my=kill-buffers--forcefully regexp internal-too)))
+  (message "%d buffer(s) killed."
+           (my=kill-buffers--forcefully regexp internal-too)))
 
-(setq my=magit-unwanted-buffers
-      '(magit-status-mode
-        magit-log-mode
-        magit-diff-mode
-        magit-revision-mode
-        magit-stash-mode
-        magit-process-mode))
+(defcustom my=magit-unwanted-modes
+  '(magit-status-mode
+    magit-log-mode
+    magit-diff-mode
+    magit-revision-mode
+    magit-stash-mode
+    magit-process-mode)
+  "A buffer with matching major-mode is killed by my=kill-buffers--magit."
+  ;; :package-version '(kill-buffers . "1.0.0")
+  :type 'list)
 
 (defun my=kill-buffers--magit ()
   "Kill all Magit buffers."
@@ -64,10 +68,51 @@ Returns a message with the count of killed buffers."
     (let ((count 0))
       (dolist (buffer (buffer-list))
         (set-buffer buffer)
-        (when (find major-mode my=magit-unwanted-buffers)
+        (when (find major-mode my=magit-unwanted-modes)
           (setq count (1+ count))
           (kill-buffer buffer)))
       (message "Killed %i Magit buffer(s)." count))))
+
+(defcustom my=all-unwanted--modes
+  (append my=magit-unwanted-modes
+          '(
+            dired-mode
+            ))
+  "A buffer with matching major-mode is killed by my=kill-buffers--unwanted."
+  ;; :package-version '(kill-buffers . "1.0.0")
+  :type 'list)
+
+(defcustom my=unwanted-buffers
+  ;; prefer explicit listing of unwanted buffers
+  '(
+    "*Backtrace*"
+    "*Buffer List*"
+    "*Compile-Log*"
+    "*Compile-Log*"
+    "*Ediff Registry*"
+    "*Help*"
+    "*Minibuf-1*"
+    "*Racket Logger </>*"
+    "*Racket Logger*"
+    "*Warnings*"
+    "*buffer-selection*"
+    "*cider-doc*"
+    "*cider-error*"
+    "*cider-inspect*"
+    "*cider-ns-browser*"
+    "*cider-refresh-log*"
+    "*edn*"
+    "*eslint*"
+    "*eslint::stderr*"
+    "*info*"
+    "*package-build-checkout*"
+    "*quelpa-build-checkout*"
+    "*spacemacs*"
+    "*vc*"
+    )
+  "A buffer with a name from this list is killed by my=kill-buffers--unwanted."
+  ;; :package-version '(kill-buffers . "1.0.0")
+  :type 'list)
 
 (defun my=kill-buffers--unwanted ()
   "Kill all unwanted buffers and delete other windows so that only one remains
@@ -78,40 +123,10 @@ displayed."
       (dolist (buffer (buffer-list))
         (set-buffer buffer)
         ;; find out buffer's major mode: (message "%s" major-mode)
-        ;; prefer explicit listing of unwanted buffers
-        (when (find major-mode
-                    (append my=magit-unwanted-buffers
-                            '(
-                              dired-mode
-                              )))
+        (when (find major-mode my=all-unwanted--modes)
           (kill-buffer buffer)
           (setq count (1+ count))))
-      (dolist (buffer '(
-                        "*Backtrace*"
-                        "*Buffer List*"
-                        "*Compile-Log*"
-                        "*Compile-Log*"
-                        "*Ediff Registry*"
-                        "*Help*"
-                        "*Minibuf-1*"
-                        "*Racket Logger </>*"
-                        "*Racket Logger*"
-                        "*Warnings*"
-                        "*buffer-selection*"
-                        "*cider-doc*"
-                        "*cider-error*"
-                        "*cider-inspect*"
-                        "*cider-ns-browser*"
-                        "*cider-refresh-log*"
-                        "*edn*"
-                        "*eslint*"
-                        "*eslint::stderr*"
-                        "*info*"
-                        "*package-build-checkout*"
-                        "*quelpa-build-checkout*"
-                        "*spacemacs*"
-                        "*vc*"
-                        ))
+      (dolist (buffer my=unwanted-buffers)
         (when (get-buffer buffer) ; check if buffer exists
           (kill-buffer buffer)
           (setq count (1+ count))))
