@@ -85,6 +85,7 @@ Returns a message with the count of killed buffers."
 (defcustom my=unwanted-buffers
   ;; prefer explicit listing of unwanted buffers
   '(
+    "*Async-native-compile-log*"
     "*Backtrace*"
     "*Buffer List*"
     "*Compile-Log*"
