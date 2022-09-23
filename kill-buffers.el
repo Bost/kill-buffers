@@ -117,6 +117,7 @@ Returns a message with the count of killed buffers."
     "*info*"
     "*lsp-log*"
     "*package-build-checkout*"
+    "*projectile-files-errors*"
     "*quelpa-build-checkout*"
     ;; "*spacemacs*" ; needed for ~SPC f e U~ M-x configuration-layer/update-packages
     "*vc*"
