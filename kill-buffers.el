@@ -1,9 +1,9 @@
 ;;; kill-buffers.el --- Jump to the Last Edit Location, regardless of the file.
 
-;; Copyright (C) 2020 Rostislav Svoboda
+;; Copyright (C) 2020 - 2022 Rostislav Svoboda
 
 ;; Authors: Rostislav Svoboda <Rostislav.Svoboda@gmail.com>
-;; Version: 0.1
+;; Version: N/A
 ;; Package-Requires:
 ;; Keywords:
 ;; URL: https://github.com/Bost/kill-buffers
