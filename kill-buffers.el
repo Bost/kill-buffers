@@ -1,6 +1,6 @@
 ;;; kill-buffers.el --- Jump to the Last Edit Location, regardless of the file.
 
-;; Copyright (C) 2020 - 2022 Rostislav Svoboda
+;; Copyright (C) 2020 - 2023 Rostislav Svoboda
 
 ;; Authors: Rostislav Svoboda <Rostislav.Svoboda@gmail.com>
 ;; Version: N/A
@@ -77,6 +77,8 @@ Returns a message with the count of killed buffers."
   (append my=magit-unwanted-modes
           '(
             dired-mode
+            Man-mode
+            woman-mode
             ))
   "A buffer with matching major-mode is killed by my=kill-buffers--unwanted."
   ;; :package-version '(kill-buffers . "1.0.0")
@@ -95,9 +97,12 @@ Returns a message with the count of killed buffers."
     "*Help*"
     "*Minibuf-1*"
     "*Native-compile-Log*"
+    "*Org-Babel Error Output*"
     "*Racket Logger </>*"
     "*Racket Logger*"
     "*Warnings*"
+    "*WoMan-Log*"
+    ;; "*bash-ls*" ; may want to restart lsp bash when killed
     "*buffer-selection*"
     "*cider-doc*"
     "*cider-error*"
@@ -110,6 +115,7 @@ Returns a message with the count of killed buffers."
     "*eslint*"
     "*eslint::stderr*"
     "*info*"
+    "*lsp-log*"
     "*package-build-checkout*"
     "*quelpa-build-checkout*"
     ;; "*spacemacs*" ; needed for ~SPC f e U~ M-x configuration-layer/update-packages
