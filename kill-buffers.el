@@ -1,4 +1,4 @@
-;;; kill-buffers.el --- Jump to the Last Edit Location, regardless of the file.  -*- lexical-binding: t; -*-
+;;; kill-buffers.el --- Kill various unwanted buffers.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020 - 2024 Rostislav Svoboda
 
