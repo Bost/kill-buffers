@@ -34,7 +34,7 @@
 ;;        ("s-k" . prot/kill-buffer-current))
 
 (require 'term)             ;; for term-send-eof
-(require 'cl)               ;; for cl-remove-if-not, cl-find
+(require 'cl-lib)           ;; for cl-remove-if-not, cl-find
 (require 'cider-connection) ;; for cider-quit
 
 (defun kb-kill-buffers--forcefully (regexp &optional internal-too)
