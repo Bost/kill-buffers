@@ -121,6 +121,7 @@ Returns a message with the count of killed buffers."
     "*Warnings*"
     "*WoMan-Log*"
     ;; "*bash-ls*" ; may want to restart lsp bash when killed
+    "*bash-ls::stderr*"
     "*buffer-selection*"
     "*cider-doc*"
     "*cider-error*"
