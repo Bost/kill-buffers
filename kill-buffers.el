@@ -1,22 +1,20 @@
 ;;; kill-buffers.el --- Kill various unwanted buffers.  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2020 - 2024 Rostislav Svoboda
+;; Copyright (C) 2020 - 2025 Rostislav Svoboda
 
 ;; Authors: Rostislav Svoboda <Rostislav.Svoboda@gmail.com>
-;; Version: N/A
-;; Package-Requires:
+;; Version: 0.1
+;; Package-Requires: ((cider "1.19.0"))
 ;; Keywords:
 ;; URL: https://github.com/Bost/kill-buffers
 
 ;;; Installation:
-;; In the `dotspacemacs/user-config', add there:
+;; In `dotspacemacs/user-config' add:
 ;;   (use-package kill-buffers)
-;; then, in the `dotspacemacs-additional-packages', add there:
+;; In `dotspacemacs-additional-packages' add:
 ;;   (kill-buffers :location
 ;;                 (recipe :fetcher github :repo "Bost/kill-buffers"))
-;; or:
-;;   $ git clone https://github.com/Bost/kill-buffers
-;; and then
+;; or after cloning repo:
 ;;   (kill-buffers :location "<path/to/the/cloned-repo>")
 
 ;; TODO see Prot's
