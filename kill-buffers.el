@@ -178,25 +178,20 @@ displayed."
       (message "Killed %i dired buffer(s)." count))))
 
 (defun kb-close-buffer ()
-  "Clojure repl buffer needs to invoke its own kill function"
+  "Clojure repl buffer needs to invoke its own kill function."
   (interactive)
   (cond
-   ((and (fboundp 'cider-repls) ;; is cider loaded?
+   ((and (fboundp 'cider-repls)
          (member (current-buffer) (cider-repls)))
-    (progn
-      (message "Calling (cider-quit)")
-      (cider-quit)))
+    (message "Calling (cider-quit)")
+    (cider-quit))
 
-   ((equal major-mode 'term-mode)
+   ((eq major-mode 'term-mode)
     (term-send-eof))
 
    (t
     (kill-buffer)))
 
-  ;; There's no need to place the call of (balance-windows-area) outside of this
-  ;; package to minimizing package dependencies, via e.g.
-  ;;   (advice-add #'kb-close-buffer :after balance-windows-area).
-  ;; `balance-windows-area' is from windows.el, which is part of GNU Emacs.
   (balance-windows-area))
 
 (provide 'kill-buffers)
