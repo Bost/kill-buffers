@@ -177,6 +177,7 @@ Returns a message with the count of killed buffers."
     "*quelpa-build-checkout*"
     ;; "*spacemacs*" ; needed for ~SPC f e U~ M-x configuration-layer/update-packages
     "*vc*"
+    "*flyspell-region*"
     )
   "A buffer with a name from this list is killed by kb-kill-buffers--unwanted."
   ;; :package-version '(kill-buffers . "1.0.0")
